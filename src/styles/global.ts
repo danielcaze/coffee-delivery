@@ -9,11 +9,32 @@ export const GlobalStyles = createGlobalStyle`
 
   :root {
     --navbar-height-desktop: 104px;
+
+    --title-xl: 4.8rem;
+    --title-l: 3.2rem;
+    --title-m: 2.4rem;
+    --title-S: 2rem;
+    --title-XS: 1.8rem;
+
+    --text-l: 2rem;
+    --text-m: 1.6rem;
+    --text-s: 1.2rem;
+
+    --button-g: 1.4rem;
+    --button-s: 1.2rem;
   }
 
   :focus {
       outline: 0;
       box-shadow: 0 0 0 2px ${(props) => props.theme['purple-300']};
+  }
+
+  html, button {
+    font-family: "Roboto", sans-serif;
+  }
+
+  strong, p {
+    line-height: 1.3;
   }
 
   html {
@@ -23,5 +44,6 @@ export const GlobalStyles = createGlobalStyle`
   button {
     border: 0;
     cursor: pointer;
+    line-height: 1.6;
   }
 `

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
   height: var(--navbar-height-desktop);
   padding: 3.2rem 16rem;
 

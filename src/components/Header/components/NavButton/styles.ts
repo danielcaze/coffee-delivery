@@ -6,7 +6,7 @@ interface NavButtonContainer {
 
 export const NavButtonContainer = styled.button<NavButtonContainer>`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 0.4rem;
 
   padding: 0.8rem;

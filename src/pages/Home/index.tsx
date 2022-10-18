@@ -1,7 +1,8 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react';
 import CoffeImageUrl from '../../assets/coffee-image.png'
 import { Benefit } from './components/Benefit';
-import { BenefitsContainer, HomeContainer, IntroductionContainer } from "./styles";
+import { CoffeeCard } from './components/CoffeeCard';
+import { BenefitsContainer, HomeContainer, IntroductionContainer, OurCoffeeContainer } from "./styles";
 
 export function Home() {
   return (
@@ -23,6 +24,16 @@ export function Home() {
         </div>
         <img src={CoffeImageUrl} alt="" />
       </IntroductionContainer>
+      <OurCoffeeContainer>
+        <strong>Nossos cafés</strong>
+        <div>
+          {
+            [1, 2, 3, 4, 1, 2, 3, 4].map(coffee => (
+              <CoffeeCard />
+            ))
+          }
+        </div>
+      </OurCoffeeContainer>
     </HomeContainer>
   )
 }

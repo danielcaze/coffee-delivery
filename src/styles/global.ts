@@ -13,8 +13,8 @@ export const GlobalStyles = createGlobalStyle`
     --title-xl: 4.8rem;
     --title-l: 3.2rem;
     --title-m: 2.4rem;
-    --title-S: 2rem;
-    --title-XS: 1.8rem;
+    --title-s: 2rem;
+    --title-xs: 1.8rem;
 
     --text-l: 2rem;
     --text-m: 1.6rem;
@@ -45,5 +45,6 @@ export const GlobalStyles = createGlobalStyle`
     border: 0;
     cursor: pointer;
     line-height: 1.6;
+    background: transparent;
   }
 `

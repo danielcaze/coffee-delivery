@@ -89,5 +89,17 @@ export const AddToCartContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 0.8rem;
+
+    > button {
+      background: ${(props) => props.theme['purple-700']};
+      transition: all 0.2s ease;
+      svg {
+        color: ${(props) => props.theme['gray-200']};
+      }
+    }
+
+    > button:hover {
+      background: ${(props) => props.theme['purple-500']};
+    }
   }
 `

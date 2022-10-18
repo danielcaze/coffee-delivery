@@ -1,7 +1,6 @@
-import { ShoppingCart } from 'phosphor-react';
 import CoffeeUrl from '../../../../assets/Coffee.png'
-import { NavButton } from '../../../../components/Header/components/NavButton';
-import { QuantityButton } from '../QuantityButton';
+import { QuantityButton } from '../../../../components/QuantityButton';
+import { AddToCartButton } from '../AddToCartButton';
 import { AddToCartContainer, CoffeeCardContainer, CoffeeTagContainer, TextContainer } from "./styles";
 
 export function CoffeeCard() {
@@ -25,9 +24,7 @@ export function CoffeeCard() {
             <div>
               <QuantityButton />
 
-              <NavButton color={'purple'}>
-                <ShoppingCart weight={'fill'} size={22} />
-              </NavButton>
+              <AddToCartButton />
             </div>
           </AddToCartContainer>
         </div>

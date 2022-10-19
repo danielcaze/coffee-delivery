@@ -1,30 +1,36 @@
-import CoffeeUrl from '../../../../assets/Coffee.png'
 import { QuantityButton } from '../../../../components/QuantityButton';
+import { CoffeeType } from '../../../../mocks/Coffees';
 import { AddToCartButton } from '../AddToCartButton';
 import { AddToCartContainer, CoffeeCardContainer, CoffeeTagContainer, TextContainer } from "./styles";
+interface CoffeeCardProps {
+  data: CoffeeType
+}
 
-export function CoffeeCard() {
+export function CoffeeCard({ data }: CoffeeCardProps) {
+  const { name, description, icon, price, tags } = data
   return (
     <CoffeeCardContainer>
-      <img src={CoffeeUrl} alt="" />
+      <img src={icon} alt="" />
       <div>
         <CoffeeTagContainer>
-          Tradicional
+          {tags.map(tag => (
+            <span key={tag}>{tag}</span>
+          ))}
         </CoffeeTagContainer>
 
         <div>
           <TextContainer>
-            <strong>Expresso Tradicional</strong>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
+            <strong>{name}</strong>
+            <p>{description}</p>
           </TextContainer>
 
           <AddToCartContainer>
-            <span> 9,90</span>
+            <span>{" " + price}</span>
 
             <div>
               <QuantityButton />
 
-              <AddToCartButton />
+              <AddToCartButton onClick={() => console.log("aa")} />
             </div>
           </AddToCartContainer>
         </div>

@@ -16,6 +16,8 @@ export const CoffeeCardContainer = styled.div`
 
   img {
     margin-top: -1.5rem;
+    max-width: 120px;
+    max-height: 120px;
   }
 
   > div {
@@ -24,7 +26,7 @@ export const CoffeeCardContainer = styled.div`
     align-items: center;
     gap: 1.6rem;
 
-    > div {
+    > div:not(:first-child) {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -33,16 +35,22 @@ export const CoffeeCardContainer = styled.div`
   }
 `
 
-export const CoffeeTagContainer = styled.span`
-  padding: 0.4rem 0.8rem;
+export const CoffeeTagContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 
-  text-transform: uppercase;
+  span {
+    padding: 0.4rem 0.8rem;
 
-  background: ${(props) => props.theme['yellow-300']};
-  color: ${(props) => props.theme['yellow-700']};
-  font-weight: 700;
+    text-transform: uppercase;
 
-  border-radius: 100px;
+    background: ${(props) => props.theme['yellow-300']};
+    color: ${(props) => props.theme['yellow-700']};
+    font-weight: 700;
+
+    border-radius: 100px;
+  }
 `
 
 export const TextContainer = styled.div`

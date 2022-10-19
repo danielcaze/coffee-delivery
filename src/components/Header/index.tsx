@@ -10,11 +10,11 @@ export function Header() {
         <img src={LogoCoffeeDelivery} alt="" />
       </div>
       <nav>
-        <NavButton color={'purple'}>
+        <NavButton variation={'purple'}>
           <MapPin size={22} weight="fill" />
           Porto Alegre, RS
         </NavButton>
-        <NavButton color={'yellow'}>
+        <NavButton variation={'yellow'}>
           <ShoppingCart size={22} weight="fill" />
         </NavButton>
       </nav>

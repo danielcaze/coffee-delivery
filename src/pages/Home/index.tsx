@@ -1,10 +1,22 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react';
+import { useEffect, useState } from 'react';
 import CoffeImageUrl from '../../assets/coffee-image.png'
+import { CoffeeType } from '../../mocks/Coffees';
+import { api } from '../../services/api';
 import { Benefit } from './components/Benefit';
 import { CoffeeCard } from './components/CoffeeCard';
 import { BenefitsContainer, HomeContainer, IntroductionContainer, OurCoffeeContainer } from "./styles";
 
 export function Home() {
+  const [coffees, setCoffees] = useState<CoffeeType[]>([])
+
+  useEffect(() => {
+    api.get('coffees')
+      .then(response => setCoffees(response.data.coffees))
+  }, [])
+
+  console.log(coffees)
+
   return (
     <HomeContainer>
       <IntroductionContainer>
@@ -28,8 +40,8 @@ export function Home() {
         <strong>Nossos cafés</strong>
         <div>
           {
-            [1, 2, 3, 4, 1, 2, 3, 4].map(coffee => (
-              <CoffeeCard />
+            coffees.map(coffee => (
+              <CoffeeCard key={coffee.id} data={coffee} />
             ))
           }
         </div>

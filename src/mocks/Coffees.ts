@@ -74,7 +74,7 @@ export const Coffees = [
   {
     name: "Chocolate Quente",
     description: "Bebida feita com chocolate dissolvido no leite quente e café",
-    tags: ["Eespecial", "Com leite"],
+    tags: ["Especial", "Com leite"],
     price: "9,90",
     icon: "/src/assets/coffees/chocolate-quente.png",
     stock: "10"

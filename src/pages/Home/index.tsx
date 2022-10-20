@@ -15,8 +15,6 @@ export function Home() {
       .then(response => setCoffees(response.data.coffees))
   }, [])
 
-  console.log(coffees)
-
   return (
     <HomeContainer>
       <IntroductionContainer>

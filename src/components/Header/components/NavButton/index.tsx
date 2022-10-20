@@ -1,15 +1,15 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { NavButtonContainer } from "./styles";
 
-interface NavButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface NavButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   variation: 'purple' | 'yellow'
   showNotifications?: boolean
 }
 
-export function NavButton({ children, variation, showNotifications }: NavButtonProps) {
+export function NavButton({ children, variation, showNotifications, ...rest }: NavButtonProps) {
   return (
-    <NavButtonContainer baseColor={variation}>
+    <NavButtonContainer baseColor={variation} {...rest}>
       {children}
     </NavButtonContainer>
   )

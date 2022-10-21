@@ -18,6 +18,7 @@ export const GlobalStyles = createGlobalStyle`
 
     --text-l: 2rem;
     --text-m: 1.6rem;
+    --text-sm: 1.4rem;
     --text-s: 1.2rem;
 
     --button-g: 1.4rem;

@@ -15,6 +15,11 @@ export const QuantityButtonContainer = styled.div`
     align-items: center;
 
     color: ${(props) => props.theme["purple-500"]};
+    transition: all 0.2s;
+
+    &:hover {
+      color: ${(props) => props.theme["purple-700"]};
+    }
   }
 
   p {

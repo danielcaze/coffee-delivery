@@ -11,12 +11,14 @@ export function Header() {
   return (
     <HeaderContainer>
       <div>
-        <img src={LogoCoffeeDelivery} alt="" />
+        <Link to="/">
+          <img src={LogoCoffeeDelivery} alt="" />
+        </Link>
       </div>
       <nav>
         <NavButton variation={'purple'}>
           <MapPin size={22} weight="fill" />
-          Porto Alegre, RS
+          João Pessoa, PB
         </NavButton>
         <Link to="/checkout">
           <NavButton variation={'yellow'}>

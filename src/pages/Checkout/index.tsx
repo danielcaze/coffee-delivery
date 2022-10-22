@@ -1,11 +1,30 @@
-import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money, Trash } from "phosphor-react";
-import { QuantityButton } from "../../components/QuantityButton";
-import { useCart } from "../../hooks/useCart";
-import { CardTitle } from "./components/CardTitle";
-import { AddressFormContainer, CheckoutCoffeeCard, CheckoutContainer, CompleteYourOrderContainer, CompleteYourOrderField, FinishOrderContainer, PaymentMethodButton, PaymentMethodButtonsContainer, PricesContainer, RemoveButton, SelectedCoffeesContainer } from "./styles";
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+  Trash,
+} from 'phosphor-react'
+import { QuantityButton } from '../../components/QuantityButton'
+import { useCart } from '../../hooks/useCart'
+import { CardTitle } from './components/CardTitle'
+import {
+  AddressFormContainer,
+  CheckoutCoffeeCard,
+  CheckoutContainer,
+  CompleteYourOrderContainer,
+  CompleteYourOrderField,
+  FinishOrderContainer,
+  PaymentMethodButton,
+  PaymentMethodButtonsContainer,
+  PricesContainer,
+  RemoveButton,
+  SelectedCoffeesContainer,
+} from './styles'
 
 export function Checkout() {
-  const { cart } = useCart()
+  const { cart, removeFromCart } = useCart()
 
   return (
     <CheckoutContainer>
@@ -13,7 +32,12 @@ export function Checkout() {
         <strong>Complete seu pedido</strong>
         <div>
           <CompleteYourOrderField>
-            <CardTitle title={"Endereço de Entrega"} subtitle={"Informe o endereço onde deseja receber seu pedido"} iconVariant={"yellow"} icon={<MapPinLine size={22} weight="regular" />} />
+            <CardTitle
+              title={'Endereço de Entrega'}
+              subtitle={'Informe o endereço onde deseja receber seu pedido'}
+              iconVariant={'yellow'}
+              icon={<MapPinLine size={22} weight="regular" />}
+            />
             <AddressFormContainer>
               <input type="tel" placeholder="CEP" required />
               <input type="text" placeholder="Rua" required />
@@ -29,7 +53,14 @@ export function Checkout() {
             </AddressFormContainer>
           </CompleteYourOrderField>
           <CompleteYourOrderField>
-            <CardTitle title={"Pagamento"} subtitle={"O pagamento é feito na entrega. Escolha a forma que deseja pagar"} iconVariant={"purple"} icon={<CurrencyDollar size={22} weight="regular" />} />
+            <CardTitle
+              title={'Pagamento'}
+              subtitle={
+                'O pagamento é feito na entrega. Escolha a forma que deseja pagar'
+              }
+              iconVariant={'purple'}
+              icon={<CurrencyDollar size={22} weight="regular" />}
+            />
             <PaymentMethodButtonsContainer>
               <PaymentMethodButton type="button">
                 <CreditCard size={16} />
@@ -51,8 +82,8 @@ export function Checkout() {
         <strong>Cafes selecionados</strong>
         <FinishOrderContainer>
           <div>
-            {cart.map(item => (
-              <CheckoutCoffeeCard>
+            {cart.map((item) => (
+              <CheckoutCoffeeCard key={item.id}>
                 <div>
                   <img src={item.icon} alt="" />
                   <div>
@@ -60,14 +91,14 @@ export function Checkout() {
                     <div className="button-container">
                       <QuantityButton
                         handleRemoveQuantity={function (): void {
-                          throw new Error("Function not implemented.");
+                          throw new Error('Function not implemented.')
                         }}
                         handleAddQuantity={function (): void {
-                          throw new Error("Function not implemented.");
+                          throw new Error('Function not implemented.')
                         }}
-                        quantity={0}
+                        quantity={item.quantity}
                       />
-                      <RemoveButton>
+                      <RemoveButton onClick={() => removeFromCart(item.id)}>
                         <Trash size={16} />
                         Remover
                       </RemoveButton>

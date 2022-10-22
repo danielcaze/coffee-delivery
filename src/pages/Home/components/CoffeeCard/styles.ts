@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const CoffeeCardContainer = styled.div`
   width: 256px;
@@ -27,10 +27,10 @@ export const CoffeeCardContainer = styled.div`
     gap: 1.6rem;
 
     > div:not(:first-child) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 3.3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3.3rem;
     }
   }
 `
@@ -62,7 +62,7 @@ export const TextContainer = styled.div`
   strong {
     font-size: var(--title-s);
     font-weight: 800;
-    font-family: "Baloo 2", sans-serif;
+    font-family: 'Baloo 2', sans-serif;
   }
 
   p {
@@ -79,16 +79,16 @@ export const AddToCartContainer = styled.div`
 
   span {
     font-size: var(--title-m);
-    font-family: "Baloo 2", sans-serif;
+    font-family: 'Baloo 2', sans-serif;
     font-weight: 800;
     color: ${(props) => props.theme['gray-700']};
   }
 
   span::before {
-    content: "R$";
+    content: 'R$';
 
     font-size: var(--text-s);
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: ${(props) => props.theme['gray-700']};
   }

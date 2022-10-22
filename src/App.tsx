@@ -1,9 +1,9 @@
-import { BrowserRouter } from "react-router-dom";
-import { Router } from "./Router";
+import { BrowserRouter } from 'react-router-dom'
+import { Router } from './Router'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyles } from './styles/global'
 import { LightTheme } from './styles/themes/Default'
-import { CartProvider } from "./contexts/CartContext";
+import { CartProvider } from './contexts/CartContext'
 
 export function App() {
   return (

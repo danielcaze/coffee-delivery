@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-interface NavButtonContainer {
+interface NavButtonContainerProps {
   baseColor: string
 }
 
-export const NavButtonContainer = styled.button<NavButtonContainer>`
+export const NavButtonContainer = styled.button<NavButtonContainerProps>`
   display: flex;
   align-items: flex-end;
   gap: 0.4rem;
@@ -14,10 +14,19 @@ export const NavButtonContainer = styled.button<NavButtonContainer>`
 
   font-size: var(--text-s);
 
-  background-color: ${(props) => props.baseColor === 'purple' ? props.theme["purple-300"] : props.theme["yellow-300"]};
-  color: ${(props) => props.baseColor === 'purple' ? props.theme["purple-700"] : props.theme["yellow-700"]};
+  background-color: ${(props) =>
+    props.baseColor === 'purple'
+      ? props.theme['purple-300']
+      : props.theme['yellow-300']};
+  color: ${(props) =>
+    props.baseColor === 'purple'
+      ? props.theme['purple-700']
+      : props.theme['yellow-700']};
 
   svg {
-    color: ${(props) => props.baseColor === 'purple' ? props.theme["purple-500"] : props.theme["yellow-500"]};
+    color: ${(props) =>
+      props.baseColor === 'purple'
+        ? props.theme['purple-500']
+        : props.theme['yellow-500']};
   }
 `

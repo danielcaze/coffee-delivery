@@ -1,14 +1,19 @@
-import { ReactNode } from "react";
-import { CardTitleContainer } from "./styles";
+import { ReactNode } from 'react'
+import { CardTitleContainer } from './styles'
 
 interface CardTitleProps {
   title: string
   subtitle: string
-  iconVariant: "yellow" | "purple"
+  iconVariant: 'yellow' | 'purple'
   icon: ReactNode
 }
 
-export function CardTitle({ title, subtitle, iconVariant = "yellow", icon }: CardTitleProps) {
+export function CardTitle({
+  title,
+  subtitle,
+  iconVariant = 'yellow',
+  icon,
+}: CardTitleProps) {
   return (
     <CardTitleContainer iconVariant={iconVariant}>
       {icon}

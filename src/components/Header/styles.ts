@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
   height: var(--navbar-height-desktop);
@@ -15,21 +15,19 @@ export const HeaderContainer = styled.header`
   nav {
     position: relative;
     display: flex;
-    gap: 1.2rem; 
+    gap: 1.2rem;
 
-    
-    > button{
+    > button {
       cursor: initial;
       box-shadow: initial;
     }
-
 
     .quantity {
       position: absolute;
       right: -0.8rem;
       top: -0.8rem;
 
-      background: ${(props) => props.theme["yellow-700"]};
+      background: ${(props) => props.theme['yellow-700']};
       color: ${(props) => props.theme.white};
 
       width: 2rem;
@@ -45,6 +43,4 @@ export const HeaderContainer = styled.header`
   }
 `
 
-export const NavButtonsWrapper = styled.nav`
-  
-`
+export const NavButtonsWrapper = styled.nav``

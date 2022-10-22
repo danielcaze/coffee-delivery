@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 interface CardTitleContainerProps {
-  iconVariant: "yellow" | "purple"
+  iconVariant: 'yellow' | 'purple'
 }
 
 export const CardTitleContainer = styled.header<CardTitleContainerProps>`
@@ -9,7 +9,7 @@ export const CardTitleContainer = styled.header<CardTitleContainerProps>`
   gap: 0.8rem;
 
   svg {
-    color: ${(props) => props.theme[`${props.iconVariant}-700`]}
+    color: ${(props) => props.theme[`${props.iconVariant}-700`]};
   }
 
   div {
@@ -19,12 +19,12 @@ export const CardTitleContainer = styled.header<CardTitleContainerProps>`
 
     p {
       font-size: var(--text-m);
-      color: ${(props) => props.theme["gray-800"]}
+      color: ${(props) => props.theme['gray-800']};
     }
 
     span {
       font-size: var(--text-s);
-      color: ${(props) => props.theme["gray-700"]}
+      color: ${(props) => props.theme['gray-700']};
     }
   }
 `

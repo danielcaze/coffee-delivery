@@ -1,9 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import BackgroundImageUrl from '../../assets/background-coffee-delivery.png'
 
-export const HomeContainer = styled.div`
-
-`
+export const HomeContainer = styled.div``
 
 export const IntroductionContainer = styled.div`
   height: 544px;
@@ -13,10 +11,10 @@ export const IntroductionContainer = styled.div`
   align-items: center;
   gap: 5.6rem;
 
-    background-image: url(${BackgroundImageUrl});
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url(${BackgroundImageUrl});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
   > div {
     display: flex;
@@ -30,7 +28,7 @@ export const IntroductionContainer = styled.div`
 
       strong {
         color: ${(props) => props.theme['gray-900']};
-        font-family: "Baloo 2", sans-serif;
+        font-family: 'Baloo 2', sans-serif;
         font-weight: 800;
         font-size: var(--title-xl);
       }
@@ -65,7 +63,7 @@ export const OurCoffeeContainer = styled.div`
 
   > strong {
     font-size: var(--title-l);
-    font-family: "Baloo 2", sans-serif;
+    font-family: 'Baloo 2', sans-serif;
     font-weight: 700;
   }
 

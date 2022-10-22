@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 interface BenefitContainerProps {
   baseColor: 'yellow-700' | 'gray-700' | 'yellow-500' | 'purple-500'

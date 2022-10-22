@@ -11,21 +11,21 @@ createServer({
 
   seeds(server) {
     server.db.loadData({
-      coffees: Coffees
+      coffees: Coffees,
     })
   },
 
   routes() {
     this.namespace = 'api'
-    this.urlPrefix = "http://localhost:3000"
+    this.urlPrefix = 'http://localhost:3000'
     this.get('/coffees', () => {
       return this.schema.all('coffee')
     })
-  }
+  },
 })
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 )

@@ -10,9 +10,7 @@ interface BenefitProps {
 export function Benefit({ text, icon, baseColor }: BenefitProps) {
   return (
     <BenefitContainer baseColor={baseColor}>
-      <div>
-        {icon}
-      </div>
+      <div>{icon}</div>
       <span>{text}</span>
     </BenefitContainer>
   )

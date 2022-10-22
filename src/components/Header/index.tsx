@@ -1,5 +1,5 @@
-import LogoCoffeeDelivery from '/assets/logo-coffee-delivery.svg'
-import { HeaderContainer, NavButtonsWrapper } from './styles'
+import LogoCoffeeDelivery from '../../assets/logo-coffee-delivery.svg'
+import { HeaderContainer } from './styles'
 import { NavButton } from './components/NavButton'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { useCart } from '../../hooks/useCart'
@@ -25,9 +25,7 @@ export function Header() {
             <ShoppingCart size={22} weight="fill" />
           </NavButton>
         </Link>
-        {cart.length > 0 && (
-          <div className="quantity">{cart.length}</div>
-        )}
+        {cart.length > 0 && <div className="quantity">{cart.length}</div>}
       </nav>
     </HeaderContainer>
   )

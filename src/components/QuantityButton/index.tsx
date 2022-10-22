@@ -1,16 +1,17 @@
 import { Minus, Plus } from 'phosphor-react'
-import { useState } from 'react'
 import { QuantityButtonContainer } from './styles'
 
-interface QuantityButton {
+interface QuantityButtonProps {
   handleRemoveQuantity: () => void
   handleAddQuantity: () => void
   quantity: number
 }
 
-export function QuantityButton({ handleAddQuantity, handleRemoveQuantity, quantity }: QuantityButton) {
-
-
+export function QuantityButton({
+  handleAddQuantity,
+  handleRemoveQuantity,
+  quantity,
+}: QuantityButtonProps) {
   return (
     <QuantityButtonContainer>
       <button onClick={handleRemoveQuantity}>

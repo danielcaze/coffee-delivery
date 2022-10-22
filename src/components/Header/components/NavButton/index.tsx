@@ -1,5 +1,5 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
-import { NavButtonContainer } from "./styles";
+import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { NavButtonContainer } from './styles'
 
 interface NavButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
@@ -7,7 +7,12 @@ interface NavButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   showNotifications?: boolean
 }
 
-export function NavButton({ children, variation, showNotifications, ...rest }: NavButtonProps) {
+export function NavButton({
+  children,
+  variation,
+  showNotifications,
+  ...rest
+}: NavButtonProps) {
   return (
     <NavButtonContainer baseColor={variation} {...rest}>
       {children}

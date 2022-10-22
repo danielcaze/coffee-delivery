@@ -1,9 +1,14 @@
-import { useState } from 'react';
-import { QuantityButton } from '../../../../components/QuantityButton';
-import { useCart } from '../../../../hooks/useCart';
-import { CoffeeType } from '../../../../mocks/Coffees';
-import { AddToCartButton } from '../AddToCartButton';
-import { AddToCartContainer, CoffeeCardContainer, CoffeeTagContainer, TextContainer } from "./styles";
+import { useState } from 'react'
+import { QuantityButton } from '../../../../components/QuantityButton'
+import { useCart } from '../../../../hooks/useCart'
+import { CoffeeType } from '../../../../mocks/Coffees'
+import { AddToCartButton } from '../AddToCartButton'
+import {
+  AddToCartContainer,
+  CoffeeCardContainer,
+  CoffeeTagContainer,
+  TextContainer,
+} from './styles'
 interface CoffeeCardProps {
   data: CoffeeType
 }
@@ -14,11 +19,11 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
   const { addToCart } = useCart()
 
   function handleAddQuantity() {
-    setQuantity(prev => prev + 1);
+    setQuantity((prev) => prev + 1)
   }
 
   function handleRemoveQuantity() {
-    setQuantity(prev => prev - 1);
+    setQuantity((prev) => prev - 1)
   }
 
   function handleAddToCart() {
@@ -32,7 +37,7 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
       <img src={icon} alt="" />
       <div>
         <CoffeeTagContainer>
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
         </CoffeeTagContainer>
@@ -44,9 +49,13 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
           </TextContainer>
 
           <AddToCartContainer>
-            <span>{" " + price}</span>
+            <span>{' ' + price}</span>
             <div>
-              <QuantityButton handleAddQuantity={handleAddQuantity} handleRemoveQuantity={handleRemoveQuantity} quantity={quantity} />
+              <QuantityButton
+                handleAddQuantity={handleAddQuantity}
+                handleRemoveQuantity={handleRemoveQuantity}
+                quantity={quantity}
+              />
 
               <AddToCartButton onClick={handleAddToCart} />
             </div>

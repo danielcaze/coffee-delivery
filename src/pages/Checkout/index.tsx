@@ -4,6 +4,7 @@ import {
   CurrencyDollar,
   MapPinLine,
   Money,
+  ShoppingCart,
   Trash,
 } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
@@ -28,6 +29,7 @@ import {
 } from './styles'
 import { PurchaseContext } from '../../contexts/PurchaseContext'
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 
 const paymentMethods = [
   {
@@ -63,7 +65,7 @@ const CheckoutFormSchema = zod.object({
 type FormSchemaType = zod.infer<typeof CheckoutFormSchema>
 
 export function Checkout() {
-  const { cart, removeFromCart } = useCart()
+  const { cart, removeFromCart, handleQuantity } = useCart()
   const { purchaseCreation } = useContext(PurchaseContext)
   const {
     register,
@@ -84,6 +86,18 @@ export function Checkout() {
       id: '',
     })
   }
+
+  function formatNumber(number: number | string) {
+    return Number(number).toFixed(2).replace('.', ',')
+  }
+
+  const shippingValue = 3.5
+  const shippingValueFormatted = formatNumber(shippingValue)
+
+  const totalItemsValue = cart.reduce((acc, obj) => acc + Number(obj?.price), 0)
+  const totalItemsValueFormatted = formatNumber(totalItemsValue)
+
+  const totalValue = formatNumber(totalItemsValue + shippingValue)
 
   return (
     <CheckoutContainer>
@@ -188,55 +202,66 @@ export function Checkout() {
       <SelectedCoffeesContainer>
         <strong>Cafes selecionados</strong>
         <FinishOrderContainer>
-          <div>
-            {cart.map((item) => (
-              <CheckoutCoffeeCard key={item.id}>
-                <div>
-                  <img src={item.icon} alt="" />
-                  <div>
-                    <p>{item.name}</p>
-                    <div className="button-container">
-                      <QuantityButton
-                        handleRemoveQuantity={function (): void {
-                          throw new Error('Function not implemented.')
-                        }}
-                        handleAddQuantity={function (): void {
-                          throw new Error('Function not implemented.')
-                        }}
-                        quantity={item.quantity}
-                      />
-                      <RemoveButton onClick={() => removeFromCart(item.id)}>
-                        <Trash size={16} />
-                        Remover
-                      </RemoveButton>
+          {cart.length > 0 ? (
+            <>
+              <div>
+                {cart.map((item) => (
+                  <CheckoutCoffeeCard key={item.id}>
+                    <div>
+                      <img src={item.icon} alt="" />
+                      <div>
+                        <p>{item.name}</p>
+                        <div className="button-container">
+                          <QuantityButton
+                            handleRemoveQuantity={() =>
+                              handleQuantity(item, 'remove', item.quantity)
+                            }
+                            handleAddQuantity={() =>
+                              handleQuantity(item, 'add', item.quantity)
+                            }
+                            quantity={item.quantity}
+                          />
+                          <RemoveButton onClick={() => removeFromCart(item.id)}>
+                            <Trash size={16} />
+                            Remover
+                          </RemoveButton>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                    <strong>R$ {formatNumber(item.price)}</strong>
+                  </CheckoutCoffeeCard>
+                ))}
+              </div>
+              <PricesContainer>
+                <div>
+                  <p>Total de itens</p>
+                  <span>R$ {totalItemsValueFormatted}</span>
                 </div>
-                <strong>R$ {item.price}</strong>
-              </CheckoutCoffeeCard>
-            ))}
-          </div>
-          <PricesContainer>
-            <div>
-              <p>Total de itens</p>
-              <span>R$ 29,70</span>
-            </div>
-            <div>
-              <p>Entrega</p>
-              <span>R$ 3,50</span>
-            </div>
-            <div>
-              <strong>Total</strong>
-              <strong>R$ 33,20</strong>
-            </div>
-          </PricesContainer>
-          <button
-            type="submit"
-            form="checkout-form"
-            disabled={isSubmitting && !paymentMethod}
-          >
-            Confirmar pedido
-          </button>
+                <div>
+                  <p>Entrega</p>
+                  <span>R$ {shippingValueFormatted}</span>
+                </div>
+                <div>
+                  <strong>Total</strong>
+                  <strong>R$ {totalValue}</strong>
+                </div>
+              </PricesContainer>
+              <button
+                type="submit"
+                form="checkout-form"
+                disabled={isSubmitting && !paymentMethod}
+              >
+                Confirmar pedido
+              </button>
+            </>
+          ) : (
+            <Link to="/" className="empty-cart">
+              <div>
+                <ShoppingCart size={32} />
+                Seu carrinho está vazio. Clique em mim pra voltar as compras!
+              </div>
+            </Link>
+          )}
         </FinishOrderContainer>
       </SelectedCoffeesContainer>
     </CheckoutContainer>

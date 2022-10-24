@@ -235,6 +235,17 @@ export const FinishOrderContainer = styled(BaseFieldContainer)`
       background: ${(props) => props.theme['yellow-700']};
     }
   }
+
+  .empty-cart {
+    text-decoration: none;
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: var(--text-s);
+      color: ${(props) => props.theme['yellow-700']};
+    }
+  }
 `
 
 export const PricesContainer = styled.div`

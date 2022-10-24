@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useState } from 'react'
 
 const PurchaseInterfaceInitialValue = {
+  id: '',
   cep: '',
   street: '',
   number: '',
-  complement: '',
   neighbourhood: '',
   city: '',
   province: '',
@@ -12,6 +12,10 @@ const PurchaseInterfaceInitialValue = {
 }
 
 type PurchaseType = typeof PurchaseInterfaceInitialValue
+
+interface PurchaseInterface extends PurchaseType {
+  complement?: string
+}
 
 interface PurchaseContextProp {
   purchaseCreation: (purchase: PurchaseType) => void
@@ -25,7 +29,7 @@ interface PurchaseProviderProps {
 }
 
 export function PurchaseProvider({ children }: PurchaseProviderProps) {
-  const [purchase, setPurchase] = useState<PurchaseType>(
+  const [purchase, setPurchase] = useState<PurchaseInterface>(
     PurchaseInterfaceInitialValue,
   )
   const value = {
@@ -33,7 +37,7 @@ export function PurchaseProvider({ children }: PurchaseProviderProps) {
     purchase,
   }
 
-  function purchaseCreation(purchase: PurchaseType) {
+  function purchaseCreation(purchase: PurchaseInterface) {
     setPurchase(purchase)
   }
 

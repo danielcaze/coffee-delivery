@@ -6,6 +6,9 @@ import {
   Money,
   Trash,
 } from 'phosphor-react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 import { QuantityButton } from '../../components/QuantityButton'
 import { useCart } from '../../hooks/useCart'
 import { CardTitle } from './components/CardTitle'
@@ -13,6 +16,7 @@ import {
   AddressFormContainer,
   CheckoutCoffeeCard,
   CheckoutContainer,
+  CheckoutForm,
   CompleteYourOrderContainer,
   CompleteYourOrderField,
   FinishOrderContainer,
@@ -22,15 +26,70 @@ import {
   RemoveButton,
   SelectedCoffeesContainer,
 } from './styles'
+import { PurchaseContext } from '../../contexts/PurchaseContext'
+import React, { useContext } from 'react'
+
+const paymentMethods = [
+  {
+    id: 'credit',
+    name: 'Cartão de crédito',
+    icon: <CreditCard size={16} />,
+  },
+  {
+    id: 'debit',
+    name: 'Cartão de débito',
+    icon: <Bank size={16} />,
+  },
+  {
+    id: 'money',
+    name: 'Dinheiro',
+    icon: <Money size={16} />,
+  },
+]
+
+const CheckoutFormSchema = zod.object({
+  cep: zod.string(),
+  street: zod.string(),
+  number: zod.string(),
+  complement: zod.string().optional(),
+  neighbourhood: zod.string(),
+  city: zod.string(),
+  province: zod.string(),
+  paymentMethod: zod
+    .string()
+    .refine((val) => paymentMethods.map((payment) => payment.id).includes(val)),
+})
+
+type FormSchemaType = zod.infer<typeof CheckoutFormSchema>
 
 export function Checkout() {
   const { cart, removeFromCart } = useCart()
+  const { purchaseCreation } = useContext(PurchaseContext)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { isSubmitting, errors },
+  } = useForm<FormSchemaType>({
+    resolver: zodResolver(CheckoutFormSchema),
+  })
+
+  const complementValue = watch('complement')
+  const paymentMethod = watch('paymentMethod')
+
+  function onSubmit(data: FormSchemaType) {
+    purchaseCreation({
+      ...data,
+      paymentMethod,
+      id: '',
+    })
+  }
 
   return (
     <CheckoutContainer>
       <CompleteYourOrderContainer>
         <strong>Complete seu pedido</strong>
-        <div>
+        <CheckoutForm id="checkout-form" onSubmit={handleSubmit(onSubmit)}>
           <CompleteYourOrderField>
             <CardTitle
               title={'Endereço de Entrega'}
@@ -39,16 +98,53 @@ export function Checkout() {
               icon={<MapPinLine size={22} weight="regular" />}
             />
             <AddressFormContainer>
-              <input type="tel" placeholder="CEP" required />
-              <input type="text" placeholder="Rua" required />
+              <input
+                autoFocus
+                type="tel"
+                placeholder="CEP"
+                required
+                {...register('cep')}
+              />
+              <input
+                type="text"
+                placeholder="Rua"
+                required
+                {...register('street')}
+              />
               <fieldset>
-                <input type="number" placeholder="Número" required />
-                <input type="text" placeholder="Complemento" required />
+                <input
+                  type="number"
+                  placeholder="Número"
+                  required
+                  {...register('number')}
+                />
+                <input
+                  type="text"
+                  placeholder="Complemento"
+                  className={!complementValue ? 'optional' : ''}
+                  {...register('complement')}
+                />
               </fieldset>
               <fieldset>
-                <input type="text" placeholder="Bairro" required />
-                <input type="text" placeholder="Cidade" required />
-                <input type="text" placeholder="UF" maxLength={2} required />
+                <input
+                  type="text"
+                  placeholder="Bairro"
+                  required
+                  {...register('neighbourhood')}
+                />
+                <input
+                  type="text"
+                  placeholder="Cidade"
+                  required
+                  {...register('city')}
+                />
+                <input
+                  type="text"
+                  placeholder="UF"
+                  maxLength={2}
+                  required
+                  {...register('province')}
+                />
               </fieldset>
             </AddressFormContainer>
           </CompleteYourOrderField>
@@ -62,21 +158,32 @@ export function Checkout() {
               icon={<CurrencyDollar size={22} weight="regular" />}
             />
             <PaymentMethodButtonsContainer>
-              <PaymentMethodButton type="button">
-                <CreditCard size={16} />
-                Cartão de crédito
-              </PaymentMethodButton>
-              <PaymentMethodButton type="button">
-                <Bank size={16} />
-                Cartão de débito
-              </PaymentMethodButton>
-              <PaymentMethodButton type="button">
-                <Money size={16} />
-                Dinheiro
-              </PaymentMethodButton>
+              {paymentMethods.map((paymentType) => (
+                <React.Fragment key={paymentType.id}>
+                  <input
+                    type="radio"
+                    id={paymentType.id}
+                    value={paymentType.id}
+                    checked={paymentMethod === paymentType.id}
+                    {...register('paymentMethod')}
+                  />
+
+                  <PaymentMethodButton type="button">
+                    <label htmlFor={paymentType.id}>
+                      {paymentType.icon}
+                      {paymentType.name}
+                    </label>
+                  </PaymentMethodButton>
+                </React.Fragment>
+              ))}
             </PaymentMethodButtonsContainer>
+            {errors.paymentMethod && (
+              <p className="error-message">
+                Por favor selecione um método de pagamento.
+              </p>
+            )}
           </CompleteYourOrderField>
-        </div>
+        </CheckoutForm>
       </CompleteYourOrderContainer>
       <SelectedCoffeesContainer>
         <strong>Cafes selecionados</strong>
@@ -123,7 +230,13 @@ export function Checkout() {
               <strong>R$ 33,20</strong>
             </div>
           </PricesContainer>
-          <button type="button">Confirmar pedido</button>
+          <button
+            type="submit"
+            form="checkout-form"
+            disabled={isSubmitting && !paymentMethod}
+          >
+            Confirmar pedido
+          </button>
         </FinishOrderContainer>
       </SelectedCoffeesContainer>
     </CheckoutContainer>

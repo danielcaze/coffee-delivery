@@ -22,7 +22,8 @@ const BaseContainer = styled.div`
 `
 
 export const CompleteYourOrderContainer = styled(BaseContainer)`
-  > div {
+  > div,
+  form {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -38,18 +39,32 @@ const BaseFieldContainer = styled.div`
 export const CompleteYourOrderField = styled(BaseFieldContainer)`
   gap: 3.2rem;
   border-radius: 6px;
+
+  > .error-message {
+    color: ${(props) => props.theme['yellow-700']};
+    font-size: var(--text-s);
+  }
 `
 
-export const AddressFormContainer = styled.form`
+export const CheckoutForm = styled.form``
+
+export const AddressFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
 
   input {
+    box-shadow: initial;
     border-radius: 4px;
     padding: 1.2rem;
     background: ${(props) => props.theme['gray-300']};
     border: 1px solid ${(props) => props.theme['gray-400']};
+    color: ${(props) => props.theme['gray-700']};
+    transition: all 0.2s;
+  }
+
+  input:focus {
+    border: 1px solid ${(props) => props.theme['yellow-700']};
   }
 
   input:first-child {
@@ -61,11 +76,21 @@ export const AddressFormContainer = styled.form`
     font-size: var(--text-s);
   }
 
+  fieldset:has(.optional):after {
+    content: 'Opcional';
+    position: absolute;
+    right: 1.2rem;
+    color: ${(props) => props.theme['gray-600']};
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+
   fieldset {
     border: 0;
     display: flex;
     align-items: center;
     gap: 1.2rem;
+    position: relative;
 
     input:nth-child(2) {
       flex: 2;
@@ -104,20 +129,34 @@ export const PaymentMethodButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1.2rem;
+
+  input[type='radio'] {
+    display: none;
+  }
+
+  input[type='radio']:checked + button {
+    background: ${(props) => props.theme['purple-300']};
+    border: 1px solid ${(props) => props.theme['purple-500']};
+  }
 `
 
 export const PaymentMethodButton = styled(BaseButton)`
-  gap: 1.2rem;
-
   flex: 1;
-
-  padding: 1.6rem;
-
   border: 1px solid transparent;
 
-  &.active {
-    background: ${(props) => props.theme['purple-300']};
-    border: 1px solid ${(props) => props.theme['purple-500']};
+  label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    gap: 1.2rem;
+    width: 100%;
+
+    padding: 1.6rem;
+
+    border: 1px solid transparent;
+
+    cursor: pointer;
   }
 `
 

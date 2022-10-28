@@ -1,25 +1,19 @@
 import { createContext, ReactNode, useState } from 'react'
 
-const PurchaseInterfaceInitialValue = {
-  id: '',
-  cep: '',
-  street: '',
-  number: '',
-  neighbourhood: '',
-  city: '',
-  province: '',
-  paymentMethod: '',
-}
-
-type PurchaseType = typeof PurchaseInterfaceInitialValue
-
-interface PurchaseInterface extends PurchaseType {
+interface PurchaseInterface {
+  id: string
+  cep: string
+  street: string
+  number: string
+  neighbourhood: string
+  city: string
+  province: string
+  paymentMethod: string
   complement?: string
 }
-
 interface PurchaseContextProp {
-  purchaseCreation: (purchase: PurchaseType) => void
-  purchase: PurchaseType
+  purchaseCreation: (purchase: PurchaseInterface) => void
+  purchase: PurchaseInterface | null
 }
 
 export const PurchaseContext = createContext({} as PurchaseContextProp)
@@ -29,9 +23,8 @@ interface PurchaseProviderProps {
 }
 
 export function PurchaseProvider({ children }: PurchaseProviderProps) {
-  const [purchase, setPurchase] = useState<PurchaseInterface>(
-    PurchaseInterfaceInitialValue,
-  )
+  const [purchase, setPurchase] = useState<PurchaseInterface | null>(null)
+
   const value = {
     purchaseCreation,
     purchase,

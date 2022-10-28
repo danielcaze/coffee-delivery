@@ -29,7 +29,7 @@ import {
 } from './styles'
 import { PurchaseContext } from '../../contexts/PurchaseContext'
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const paymentMethods = [
   {
@@ -75,6 +75,7 @@ export function Checkout() {
   } = useForm<FormSchemaType>({
     resolver: zodResolver(CheckoutFormSchema),
   })
+  const navigate = useNavigate()
 
   const complementValue = watch('complement')
   const paymentMethod = watch('paymentMethod')
@@ -85,6 +86,7 @@ export function Checkout() {
       paymentMethod,
       id: '',
     })
+    navigate('/order/1')
   }
 
   function formatNumber(number: number | string) {

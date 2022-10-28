@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { Coffees } from '../mocks/Coffees'
 
 interface CartItem {
@@ -26,7 +26,15 @@ interface CartProviderProps {
 }
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cart, setCart] = useState<CartItem[]>([])
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    const storagedCartItems = localStorage.getItem(
+      '@coffee-delivery:coffees-1.0.0',
+    )
+    if (storagedCartItems) {
+      return JSON.parse(storagedCartItems)
+    }
+    return []
+  })
 
   const value = {
     cart,
@@ -118,6 +126,10 @@ export function CartProvider({ children }: CartProviderProps) {
         break
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem('@coffee-delivery:coffees-1.0.0', JSON.stringify(cart))
+  }, [cart])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

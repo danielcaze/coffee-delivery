@@ -51,7 +51,7 @@ export const DeliveryDataContainer = styled.div`
     border-radius: 6px 36px;
     padding: 0.1rem;
     background: ${(props) =>
-    `linear-gradient(to right,${props.theme['purple-500']},${props.theme['yellow-500']})`};
+      `linear-gradient(to right,${props.theme['purple-500']},${props.theme['yellow-500']})`};
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;

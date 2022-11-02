@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
+import { api } from '../services/api'
 
 interface PurchaseInterface {
   id: string
@@ -13,7 +14,7 @@ interface PurchaseInterface {
 }
 interface PurchaseContextProp {
   purchaseCreation: (purchase: PurchaseInterface) => void
-  purchase: PurchaseInterface | null
+  purchases: PurchaseInterface[]
 }
 
 export const PurchaseContext = createContext({} as PurchaseContextProp)
@@ -23,16 +24,37 @@ interface PurchaseProviderProps {
 }
 
 export function PurchaseProvider({ children }: PurchaseProviderProps) {
-  const [purchase, setPurchase] = useState<PurchaseInterface | null>(null)
+  const [purchases, setPurchases] = useState<PurchaseInterface[]>([])
 
   const value = {
     purchaseCreation,
-    purchase,
+    purchases,
   }
 
   function purchaseCreation(purchase: PurchaseInterface) {
-    setPurchase(purchase)
+    setPurchases((prevState) => [...prevState, purchase])
+    storeInLocalStorage(purchase)
   }
+
+  function storeInLocalStorage(data: PurchaseInterface) {
+    localStorage.setItem(
+      '@coffee-delivery:orders-1.0.0',
+      JSON.stringify([...purchases, data]),
+    )
+  }
+
+  useEffect(() => {
+    async function getOrders() {
+      try {
+        await api
+          .get('orders')
+          .then((response) => setPurchases(response.data.orders))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getOrders()
+  }, [])
 
   return (
     <PurchaseContext.Provider value={value}>

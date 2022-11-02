@@ -66,7 +66,7 @@ type FormSchemaType = zod.infer<typeof CheckoutFormSchema>
 
 export function Checkout() {
   const { cart, removeFromCart, handleQuantity } = useCart()
-  const { purchaseCreation } = useContext(PurchaseContext)
+  const { purchaseCreation, purchases } = useContext(PurchaseContext)
   const {
     register,
     handleSubmit,
@@ -81,12 +81,14 @@ export function Checkout() {
   const paymentMethod = watch('paymentMethod')
 
   function onSubmit(data: FormSchemaType) {
-    purchaseCreation({
+    const id = String(purchases.length + 1)
+    const formData = {
       ...data,
       paymentMethod,
-      id: '',
-    })
-    navigate('/order/1')
+      id,
+    }
+    purchaseCreation(formData)
+    navigate(`/order/${id}`, { state: formData })
   }
 
   function formatNumber(number: number | string) {

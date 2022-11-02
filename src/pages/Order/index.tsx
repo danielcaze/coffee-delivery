@@ -7,11 +7,10 @@ import {
 
 import OrderImage from '../../assets/man_wearing_yellow_shirt_and_green_pants_on_a_bike.png'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
-import { useContext } from 'react'
-import { PurchaseContext } from '../../contexts/PurchaseContext'
+import { useLocation } from 'react-router-dom'
 
 export function Order() {
-  const { purchase } = useContext(PurchaseContext)
+  const location = useLocation()
 
   return (
     <OrderContainer>
@@ -29,11 +28,12 @@ export function Order() {
               <p>
                 Entrega em{' '}
                 <span>
-                  {purchase.street}, {purchase.number}
+                  {location.state?.street}, {location.state?.number}
                 </span>
               </p>
               <span>
-                {purchase.neighbourhood} - {purchase.city}, {purchase.province}
+                {location.state?.neighbourhood} - {location.state?.city},{' '}
+                {location.state?.province}
               </span>
             </div>
           </DeliveryData>
@@ -53,11 +53,11 @@ export function Order() {
             <div>
               <p>Pagamento na entrega</p>
               <span>
-                {purchase.paymentMethod === 'credit'
+                {location.state?.paymentMethod === 'credit'
                   ? 'Cartão de Crédito'
-                  : purchase.paymentMethod === 'debit'
-                    ? 'Cartão de Débito'
-                    : 'Dinheiro'}
+                  : location.state?.paymentMethod === 'debit'
+                  ? 'Cartão de Débito'
+                  : 'Dinheiro'}
               </span>
             </div>
           </DeliveryData>

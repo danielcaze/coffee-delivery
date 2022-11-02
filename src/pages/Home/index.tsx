@@ -16,7 +16,16 @@ export function Home() {
   const [coffees, setCoffees] = useState<CoffeeType[]>([])
 
   useEffect(() => {
-    api.get('coffees').then((response) => setCoffees(response.data.coffees))
+    async function getCoffees() {
+      try {
+        await api
+          .get('coffees')
+          .then((response) => setCoffees(response.data.coffees))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getCoffees()
   }, [])
 
   return (

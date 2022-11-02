@@ -34,6 +34,7 @@ export function PurchaseProvider({ children }: PurchaseProviderProps) {
   function purchaseCreation(purchase: PurchaseInterface) {
     setPurchases((prevState) => [...prevState, purchase])
     storeInLocalStorage(purchase)
+    localStorage.removeItem('@coffee-delivery:coffees-1.0.0')
   }
 
   function storeInLocalStorage(data: PurchaseInterface) {

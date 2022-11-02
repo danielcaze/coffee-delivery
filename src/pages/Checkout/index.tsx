@@ -71,6 +71,7 @@ export function Checkout() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { isSubmitting, errors },
   } = useForm<FormSchemaType>({
     resolver: zodResolver(CheckoutFormSchema),
@@ -88,6 +89,7 @@ export function Checkout() {
       id,
     }
     purchaseCreation(formData)
+    reset()
     navigate(`/order/${id}`, { state: formData })
   }
 
